@@ -1,11 +1,13 @@
 package api.tests;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
 import static api.utils.AuthUtils.auth;
 import static org.hamcrest.Matchers.equalTo;
 
+@Epic(value = "API Tests")
 public class ApiTests {
 
     /**

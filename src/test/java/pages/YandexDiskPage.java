@@ -1,6 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,8 +9,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import tests.BaseTest;
 
+import static tests.BaseTest.getDriver;
 
 /**
  * Класс описания страницы Yandex Disk.
@@ -75,7 +76,7 @@ public class YandexDiskPage {
     private WebElement createTextDocument;
 
     /**
-     * Поиск и объявление локатора Текста Нового Файла.
+     * Поиск и объявление локатора названия Нового Файла.
      */
     @FindBy(xpath = "//span[@class=\"clamped-text\"]")
     private WebElement textNewFile;
@@ -93,6 +94,19 @@ public class YandexDiskPage {
     @FindBy(xpath = "//a[@class=\"menu__item menu__item_type_link"
             + " legouser__menu-item legouser__menu-item_action_exit\"]")
     private WebElement outButton;
+
+    /**
+     * Поиск и объявление локатора Нового Загруженного Файла.
+     */
+    @FindBy(xpath = "//div[@class=\"listing-item__title"
+            + " listing-item__title_overflow_clamp\"]")
+    private WebElement newUploadFile;
+
+    /**
+     * Поиск и объявление локатора текста Нового Загруженного Файла.
+     */
+    @FindBy(xpath = "//div[@class=\"__page-1\"]")
+    private WebElement fileTextUploadFile;
 
     /**
      * Метод проверки на наличия элементов на странице.
@@ -181,10 +195,10 @@ public class YandexDiskPage {
     }
 
     /**
-     * Метод получения элемента текста Нового Файла
+     * Метод получения элемента названия Нового Файла
      * и проверка его наличия на странице.
      *
-     * @return элемент текста Нового Файла
+     * @return элемент названия Нового Файла
      */
     public WebElement getTextNewFile() {
         openElement(textNewFile);
@@ -211,6 +225,28 @@ public class YandexDiskPage {
     public WebElement getOutButton() {
         openElement(outButton);
         return outButton;
+    }
+
+    /**
+     * Метод получения элемента Нового Загруженного файла
+     * и проверка его наличия на странице.
+     *
+     * @return элемент Нового Загруженного файла
+     */
+    public WebElement getNewUploadFile() {
+        openElement(newUploadFile);
+        return newUploadFile;
+    }
+
+    /**
+     * Метод получения элемента Текста Загруженного файла
+     * и проверка его наличия на странице.
+     *
+     * @return элемент Нового Загруженного файла
+     */
+    public WebElement getFileTextUploadFile() {
+        openElement(fileTextUploadFile);
+        return fileTextUploadFile;
     }
 
     /**
@@ -246,7 +282,7 @@ public class YandexDiskPage {
      */
     @Step("Открытие Новой папки")
     public YandexDiskPage openNewFolder() {
-        Actions actions = new Actions(BaseTest.getDriver());
+        Actions actions = new Actions(getDriver());
         actions.doubleClick(getNewFolder()).perform();
         return this;
     }
@@ -267,11 +303,11 @@ public class YandexDiskPage {
     }
 
     /**
-     * Метод получения текста Нового Файла.
+     * Метод получения названия Нового Файла.
      *
      * @return Текущая страница
      */
-    @Step("Получение текста Нового Файла")
+    @Step("Получение названия Нового Файла")
     public String newFileTextCheck() {
         return getTextNewFile().getText();
     }
@@ -296,5 +332,43 @@ public class YandexDiskPage {
     public YandexDiskPage outButtonClick() {
         getOutButton().click();
         return this;
+    }
+
+    /**
+     * Метод Загрузки файла на Яндекс Диск.
+     *
+     * @return Текущая страница
+     */
+    @Step("Загрузка файла")
+    public YandexDiskPage uploadButtonClick() {
+        By fileInput = By.cssSelector("input[type=file]");
+        String filePath = "C:\\Users\\timsb\\IdeaProjects"
+                + "\\QAUIautotests\\FileUpload.txt";
+        getDriver().findElement(fileInput).sendKeys(filePath);
+        return this;
+    }
+
+    /**
+     * Метод Открытия Нового Загруженного файла.
+     *
+     * @return Текущая страница
+     */
+    @Step("Открытие Нового Загруженного файла")
+    public YandexDiskPage openNewUploadFile() {
+        final int x = 3000;
+        new Actions(getDriver()).pause(x).perform();
+        Actions actions = new Actions(getDriver());
+        actions.doubleClick(getNewUploadFile()).perform();
+        return this;
+    }
+
+    /**
+     * Метод получения текста Загруженного Файла.
+     *
+     * @return Текущая страница
+     */
+    @Step("Получение текста Загруженного Файла")
+    public String newFileText() {
+        return getFileTextUploadFile().getText();
     }
 }

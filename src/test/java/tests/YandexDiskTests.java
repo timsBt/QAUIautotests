@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Epic;
 import org.openqa.selenium.WindowType;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -13,7 +14,8 @@ import java.util.ArrayList;
 
 import static utils.PropertiesUtils.valueProperties;
 
-public class CreateFolderFileTest extends BaseTest {
+@Epic(value = "UI Tests")
+public class YandexDiskTests extends BaseTest {
 
     /**
      * Открытие главной страницы.
@@ -24,10 +26,10 @@ public class CreateFolderFileTest extends BaseTest {
     }
 
     /**
-     * Тест авторизации и создания файла в папке на Яндекс Диске.
+     * Тест авторизации, Создание папки и файла на Яндекс Диске.
      */
-    @Test(description = "TC-1 Авторизация и Создание папки и файла")
-    public void authorizationCreateFolderFileTest() {
+    @Test(description = "TC-1 Авторизация, Создание папки и файла")
+    public void authorizationCreateFileTest() {
         MainPage mainPage = new MainPage(getDriver());
         AuthorizationPage authorization = new AuthorizationPage(getDriver());
         mainPage.signInButtonClick()
@@ -52,13 +54,43 @@ public class CreateFolderFileTest extends BaseTest {
     }
 
     /**
+     * Тест авторизации, Создание папки и Загрузка файла на Яндекс Диске.
+     */
+    @Test(description = "TC-2 Авторизация, Создание папки и Загрузка файла")
+    public void autorizationUploadFileTest() {
+        MainPage mainPage = new MainPage(getDriver());
+        AuthorizationPage authorization = new AuthorizationPage(getDriver());
+        mainPage.signInButtonClick()
+            .signInYandexIdButtonClick();
+        authorization.userInput(valueProperties("login"),
+            valueProperties("password"));
+        mainPage.logButtonClick();
+        Assert.assertEquals(mainPage.userNameCheck(), "Timur Bekmatov");
+        getDriver().switchTo().newWindow(WindowType.TAB);
+        getDriver().get(valueProperties("yandexDiskPageUrl"));
+        YandexDiskPage yandexDiskPage = new YandexDiskPage(getDriver());
+        yandexDiskPage.createButtonClick()
+            .createFolder("Two Folder")
+            .openNewFolder()
+            .uploadButtonClick()
+            .openNewUploadFile();
+        ArrayList tabs = new ArrayList(getDriver().getWindowHandles());
+        getDriver().switchTo().window(String.valueOf(tabs.get(2)));
+        Assert.assertEquals(yandexDiskPage.newFileText(), "Привет!",
+            "Текст не соответствует");
+        getDriver().switchTo().window(String.valueOf(tabs.get(2))).close();
+        getDriver().switchTo().window(String.valueOf(tabs.get(1)));
+        getDriver().navigate().refresh();
+    }
+
+    /**
      * Метод выхода с аккаунта на Яндекс Диске и на Яндекс Дзене.
      */
     @AfterMethod
     public void deauthorization() {
         YandexDiskPage yandexDiskPage = new YandexDiskPage(getDriver());
-        yandexDiskPage.loginButtonClick();
-        yandexDiskPage.outButtonClick();
+        yandexDiskPage.loginButtonClick()
+            .outButtonClick();
         ArrayList tabs = new ArrayList(getDriver().getWindowHandles());
         getDriver().switchTo().window(String.valueOf(tabs.get(0)));
         MainPage mainPage = new MainPage(getDriver());

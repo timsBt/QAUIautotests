@@ -4,6 +4,7 @@
     <test verbose="2" preserve-order="true" name="All Tests">
         <classes>
             <class name="tests.YandexDiskTests"/>
+            <class name="api.tests.ApiTests"/>
         </classes>
     </test>
 </suite>
