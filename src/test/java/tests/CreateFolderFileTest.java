@@ -9,7 +9,6 @@ import pages.AuthorizationPage;
 import pages.MainPage;
 import pages.YandexDiskPage;
 
-
 import java.util.ArrayList;
 
 import static utils.PropertiesUtils.valueProperties;
