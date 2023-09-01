@@ -7,6 +7,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.openqa.selenium.WindowType;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -101,6 +102,7 @@ public class YandexDiskTests extends BaseTest {
         yandexDiskPage.loginButtonClick()
             .outButtonClick();
         ArrayList tabs = new ArrayList(getDriver().getWindowHandles());
+        getDriver().switchTo().window(String.valueOf(tabs.get(1))).close();
         getDriver().switchTo().window(String.valueOf(tabs.get(0)));
         MainPage mainPage = new MainPage(getDriver());
         mainPage.outButtonClick();
