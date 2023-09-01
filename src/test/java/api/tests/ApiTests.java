@@ -33,7 +33,7 @@ public class ApiTests {
     /**
      * Тест Создания папки.
      */
-    @Test(priority = 1)
+    @Test(description = "Создание папки", priority = 1)
     @Description("Создание папки")
     public void createFolderTest() {
         auth()
@@ -49,7 +49,7 @@ public class ApiTests {
     /**
      * Тест Копирования файла в Созданную ранее папку.
      */
-    @Test(priority = 2)
+    @Test(description = "Копирование файла в папку", priority = 2)
     @Description("Копирование файла в Созданную ранее папку")
     public void copyFileTest() {
         auth()
@@ -66,7 +66,7 @@ public class ApiTests {
     /**
      * Тест Переименования файла в папке.
      */
-    @Test(priority = number3)
+    @Test(description = "Переименование файла в папке", priority = number3)
     @Description("Переименование файла в папке")
     public void renameFileTest() {
         auth()

@@ -1,6 +1,11 @@
 package tests;
 
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.openqa.selenium.WindowType;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -29,6 +34,8 @@ public class YandexDiskTests extends BaseTest {
      * Тест авторизации, Создание папки и файла на Яндекс Диске.
      */
     @Test(description = "TC-1 Авторизация, Создание папки и файла")
+    @Feature(value = "Создание папки и файла")
+    @Description("Авторизация, Создание папки и файла")
     public void authorizationCreateFileTest() {
         MainPage mainPage = new MainPage(getDriver());
         AuthorizationPage authorization = new AuthorizationPage(getDriver());
@@ -57,6 +64,8 @@ public class YandexDiskTests extends BaseTest {
      * Тест авторизации, Создание папки и Загрузка файла на Яндекс Диске.
      */
     @Test(description = "TC-2 Авторизация, Создание папки и Загрузка файла")
+    @Feature(value = "Создание папки и Загрузка файла")
+    @Description("Авторизация, Создание папки и Загрузка файла")
     public void autorizationUploadFileTest() {
         MainPage mainPage = new MainPage(getDriver());
         AuthorizationPage authorization = new AuthorizationPage(getDriver());
