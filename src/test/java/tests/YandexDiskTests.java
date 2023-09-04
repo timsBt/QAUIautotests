@@ -98,7 +98,6 @@ public class YandexDiskTests extends BaseTest {
         yandexDiskPage.loginButtonClick()
             .outButtonClick();
         ArrayList tabs = new ArrayList(getDriver().getWindowHandles());
-        getDriver().switchTo().window(String.valueOf(tabs.get(1))).close();
         getDriver().switchTo().window(String.valueOf(tabs.get(0)));
         MainPage mainPage = new MainPage(getDriver());
         mainPage.outButtonClick();

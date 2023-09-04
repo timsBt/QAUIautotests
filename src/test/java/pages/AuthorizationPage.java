@@ -5,7 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import java.time.Duration;
+
+import static tests.BaseTest.getDriver;
 
 /**
  * Класс описания страницы авторизации.
@@ -44,7 +50,11 @@ public class AuthorizationPage {
      *
      * @param element элемент на странице
      */
-    public void openElement(final WebElement element) {
+    public void checkOpen(final WebElement element) {
+        final int seconds = 10;
+        WebDriverWait wait = new WebDriverWait(getDriver(),
+                Duration.ofSeconds(seconds));
+        wait.until(ExpectedConditions.visibilityOf(element));
         Assert.assertTrue(element.isDisplayed());
     }
 
@@ -55,7 +65,7 @@ public class AuthorizationPage {
      * @return элемент поля Логин
      */
     public WebElement getLogin() {
-        openElement(login);
+        checkOpen(login);
         return login;
     }
 
@@ -66,7 +76,7 @@ public class AuthorizationPage {
      * @return элемент кнопки "Войти"
      */
     public WebElement getSignIn() {
-        openElement(signIn);
+        checkOpen(signIn);
         return signIn;
     }
 
@@ -77,7 +87,7 @@ public class AuthorizationPage {
      * @return элемент поля Пароля
      */
     public WebElement getPassword() {
-        openElement(password);
+        checkOpen(password);
         return password;
     }
 

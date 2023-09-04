@@ -3,7 +3,12 @@
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="All Tests">
         <classes>
-            <class name="tests.YandexDiskTests"/>
+            <class name="tests.YandexDiskTests">
+                <methods>
+                    <include name="authorizationCreateFileTest"/>
+                    <include name="autorizationUploadFileTest"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

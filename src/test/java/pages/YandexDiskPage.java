@@ -8,7 +8,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import java.time.Duration;
 
 import static tests.BaseTest.getDriver;
 
@@ -113,7 +117,11 @@ public class YandexDiskPage {
      *
      * @param element элемент на странице
      */
-    public void openElement(final WebElement element) {
+    public void checkOpen(final WebElement element) {
+        final int seconds = 10;
+        WebDriverWait wait = new WebDriverWait(getDriver(),
+                Duration.ofSeconds(seconds));
+        wait.until(ExpectedConditions.visibilityOf(element));
         Assert.assertTrue(element.isDisplayed());
     }
 
@@ -124,7 +132,7 @@ public class YandexDiskPage {
      * @return элемент кнопки "Создать"
      */
     public WebElement getCreateButton() {
-        openElement(createButton);
+        checkOpen(createButton);
         return createButton;
     }
 
@@ -135,7 +143,7 @@ public class YandexDiskPage {
      * @return элемент кнопки "Создать Папку"
      */
     public WebElement getCreateFolderButton() {
-        openElement(createFolderButton);
+        checkOpen(createFolderButton);
         return createFolderButton;
     }
 
@@ -146,7 +154,7 @@ public class YandexDiskPage {
      * @return элемент поля ввода Названия папки
      */
     public WebElement getCreateNameFolder() {
-        openElement(createNameFolder);
+        checkOpen(createNameFolder);
         return createNameFolder;
     }
 
@@ -157,7 +165,7 @@ public class YandexDiskPage {
      * @return элемент поля ввода Названия Документа
      */
     public WebElement getCreateNameDocument() {
-        openElement(createNameDocument);
+        checkOpen(createNameDocument);
         return createNameDocument;
     }
 
@@ -168,7 +176,7 @@ public class YandexDiskPage {
      * @return элемент кнопки Сохранить
      */
     public WebElement getSaveFolderAndFiles() {
-        openElement(saveFolderAndFiles);
+        checkOpen(saveFolderAndFiles);
         return saveFolderAndFiles;
     }
 
@@ -179,7 +187,7 @@ public class YandexDiskPage {
      * @return элемент Новой папки
      */
     public WebElement getNewFolder() {
-        openElement(newFolder);
+        checkOpen(newFolder);
         return newFolder;
     }
 
@@ -190,7 +198,7 @@ public class YandexDiskPage {
      * @return элемент кнопки "Создать Текстовый Документ"
      */
     public WebElement getCreateTextDocument() {
-        openElement(createTextDocument);
+        checkOpen(createTextDocument);
         return createTextDocument;
     }
 
@@ -201,7 +209,7 @@ public class YandexDiskPage {
      * @return элемент названия Нового Файла
      */
     public WebElement getTextNewFile() {
-        openElement(textNewFile);
+        checkOpen(textNewFile);
         return textNewFile;
     }
 
@@ -212,7 +220,7 @@ public class YandexDiskPage {
      * @return элемент кнопки Логин
      */
     public WebElement getLoginButton() {
-        openElement(loginButton);
+        checkOpen(loginButton);
         return loginButton;
     }
 
@@ -223,7 +231,7 @@ public class YandexDiskPage {
      * @return элемент кнопки Выйти
      */
     public WebElement getOutButton() {
-        openElement(outButton);
+        checkOpen(outButton);
         return outButton;
     }
 
@@ -234,7 +242,7 @@ public class YandexDiskPage {
      * @return элемент Нового Загруженного файла
      */
     public WebElement getNewUploadFile() {
-        openElement(newUploadFile);
+        checkOpen(newUploadFile);
         return newUploadFile;
     }
 
@@ -245,7 +253,7 @@ public class YandexDiskPage {
      * @return элемент Нового Загруженного файла
      */
     public WebElement getFileTextUploadFile() {
-        openElement(fileTextUploadFile);
+        checkOpen(fileTextUploadFile);
         return fileTextUploadFile;
     }
 

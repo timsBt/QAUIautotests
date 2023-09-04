@@ -5,7 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import java.time.Duration;
+
+import static tests.BaseTest.getDriver;
 
 /**
  * Класс описания главной страницы Yandex.
@@ -57,7 +63,11 @@ public class MainPage {
      *
      * @param element элемент на странице
      */
-    public void openElement(final WebElement element) {
+    public void checkOpen(final WebElement element) {
+        final int seconds = 10;
+        WebDriverWait wait = new WebDriverWait(getDriver(),
+                Duration.ofSeconds(seconds));
+        wait.until(ExpectedConditions.visibilityOf(element));
         Assert.assertTrue(element.isDisplayed());
     }
 
@@ -68,7 +78,7 @@ public class MainPage {
      * @return элемент кнопки "Войти"
      */
     public WebElement getSignIn() {
-        openElement(signIn);
+        checkOpen(signIn);
         return signIn;
     }
 
@@ -79,7 +89,7 @@ public class MainPage {
      * @return элемент кнопки "Войти через Яндекс ID"
      */
     public WebElement getSignInYandexId() {
-        openElement(signInYandexId);
+        checkOpen(signInYandexId);
         return signInYandexId;
     }
 
@@ -90,7 +100,7 @@ public class MainPage {
      * @return элемент кнопки Профиля
      */
     public WebElement getLoginButton() {
-        openElement(loginButton);
+        checkOpen(loginButton);
         return loginButton;
     }
 
@@ -101,7 +111,7 @@ public class MainPage {
      * @return элемент элемента текста Имени пользователя
      */
     public WebElement getUserNameText() {
-        openElement(userNameText);
+        checkOpen(userNameText);
         return userNameText;
     }
 
@@ -112,7 +122,7 @@ public class MainPage {
      * @return элемент кнопки "Выйти"
      */
     public WebElement getOutButton() {
-        openElement(outButton);
+        checkOpen(outButton);
         return outButton;
     }
 
