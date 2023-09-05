@@ -86,7 +86,7 @@ public class YandexDiskTests extends BaseTest {
             "Текст не соответствует");
         getDriver().switchTo().window(String.valueOf(tabs.get(2))).close();
         getDriver().switchTo().window(String.valueOf(tabs.get(1)));
-        getDriver().navigate().refresh();
+        yandexDiskPage.closeActionBar();
     }
 
     /**

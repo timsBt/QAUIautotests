@@ -113,6 +113,13 @@ public class YandexDiskPage {
     private WebElement fileTextUploadFile;
 
     /**
+     * Поиск и объявление локатора закрытия ActionBar.
+     */
+    @FindBy(xpath = "//button[@class=\"Button2 Button2_view_clear-inverse"
+            + " Button2_size_m resources-action-bar__close\"]")
+    private WebElement actionBar;
+
+    /**
      * Метод проверки на наличия элементов на странице.
      *
      * @param element элемент на странице
@@ -258,6 +265,17 @@ public class YandexDiskPage {
     }
 
     /**
+     * Метод получения элемента ActionBar'a
+     * и проверка его наличия на странице.
+     *
+     * @return элемент ActionBar'a
+     */
+    public WebElement getActionBar() {
+        checkOpen(actionBar);
+        return actionBar;
+    }
+
+    /**
      * Метод клика по кнопке "Создать".
      *
      * @return Текущая страница
@@ -378,5 +396,16 @@ public class YandexDiskPage {
     @Step("Получение текста Загруженного Файла")
     public String newFileText() {
         return getFileTextUploadFile().getText();
+    }
+
+    /**
+     * Метод закрытия ActionBar.
+     *
+     * @return Текущая страница
+     */
+    @Step("Закрытие ActionBar")
+    public YandexDiskPage closeActionBar() {
+        getActionBar().click();
+        return this;
     }
 }
