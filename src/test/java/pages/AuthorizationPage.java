@@ -46,6 +46,12 @@ public class AuthorizationPage {
     private WebElement password;
 
     /**
+     * Поиск и объявление локатора кнопки "Почта".
+     */
+    @FindBy(xpath = "//button[@data-type=\"login\"]")
+    private WebElement mailButton;
+
+    /**
      * Метод проверки на наличия элементов на странице.
      *
      * @param element элемент на странице
@@ -92,16 +98,27 @@ public class AuthorizationPage {
     }
 
     /**
+     * Метод получения элемента кнопки Почта
+     * и проверка его наличия на странице.
+     *
+     * @return элемент кнопки почта
+     */
+    public WebElement getMailButton() {
+        checkOpen(mailButton);
+        return mailButton;
+    }
+
+    /**
      * Метод ввода данных в поля Логин, Пароль и нажатие кнопки Войти.
      *
      * @param username Имя пользователя
      * @param passwordUser Пароль пользователя
      * @return Текущая страница
      */
-    @SuppressWarnings("checkstyle:HiddenField")
     @Step("Авторизация с логином и паролем")
     public AuthorizationPage userInput(final String username,
                                        final String passwordUser) {
+        getMailButton().click();
         getLogin().sendKeys(username);
         getSignIn().click();
         getPassword().sendKeys(passwordUser);
